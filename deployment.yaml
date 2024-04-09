@@ -1,0 +1,23 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: flask-mongodb-app
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: flask-mongodb-app
+  template:
+    metadata:
+      labels:
+        app: flask-mongodb-app
+    spec:
+      containers:
+      - name: flask-app
+        image: yourusername/flask-app:latest  # Замініть yourusername на ваше ім'я користувача на Docker Hub
+        ports:
+        - containerPort: 8080
+      - name: mongodb
+        image: mongo:latest
+        ports:
+        - containerPort: 27017
